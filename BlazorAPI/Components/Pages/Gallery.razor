@@ -1,0 +1,28 @@
+﻿@page "/gallery"
+@using BlazorAPI.Services
+@inject ImageService ImageService
+
+<h1>Gallery</h1>
+
+@if (images is not null)
+{
+    <div>
+        @foreach (var image in images)
+        {
+            <img src="@image" alt="Image"/>
+        }
+    </div>
+}
+else
+{
+    <p>Loading...</p>
+}
+
+@code {
+    private string[] images;
+
+    protected override async Task OnInitializedAsync()
+    {
+        images = await ImageService.GetImagesAsync();
+    }
+}
