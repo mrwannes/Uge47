@@ -4,23 +4,25 @@
 
 <h1>Gallery</h1>
 
-@if (images is not null)
+@if (images is null)
+{
+    <p>Loading...</p>
+}
+else
 {
     <div>
         @foreach (var image in images)
         {
-            <img src="@image" alt="Image"/>
+            <img src="@image" alt="Image" />
         }
     </div>
+    
 }
-else
-{
-    <p>Loading...</p>
-}
+
+
 
 @code {
     private string[] images;
-
     protected override async Task OnInitializedAsync()
     {
         images = await ImageService.GetImagesAsync();
